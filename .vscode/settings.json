@@ -1,0 +1,10 @@
+{
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.defaultInterpreterPath": "/home/subburajan/Test/github_actions/tenv/bin/python",
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "pythonTestExplorer.testFramework": "pytest",
+    "python.linting.pycodestyleEnabled": true
+}
