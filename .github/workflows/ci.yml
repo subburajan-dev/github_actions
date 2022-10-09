@@ -1,7 +1,9 @@
 name: Github actions
 
+#Name of action
 run-name: practice run
 
+#Event
 on:
   - push
 
@@ -9,14 +11,21 @@ on:
 
 jobs:
   
-  app_runner:
+  app_setup:
     runs-on: ubuntu-latest
     steps:
+
+      # include github repo actions
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+
+      #setup python environment
+      - name: Setup python
+        uses: actions/setup-python@v4
         with: 
-          python-version: "3.9 - 3.11"
-      - run: python app.py
-      
+          python-version: "3.10"
+
+      - run: flake8 
+
+
 
     
