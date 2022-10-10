@@ -6,11 +6,10 @@ run-name: practice run
 #Event
 on:
   - push
+  - pull_request
 
 
-
-jobs:
-  
+jobs:      
   app_setup:
     runs-on: ubuntu-latest
     steps:
@@ -28,6 +27,8 @@ jobs:
       - run: flake8
       - run: pytest
 
-
-
-    
+  docker_setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: docker build . -t 
