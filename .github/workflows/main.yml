@@ -8,7 +8,6 @@ on:
   - push
   - pull_request
 
-
 jobs:      
 
   app_setup:
@@ -23,13 +22,37 @@ jobs:
         uses: actions/setup-python@v4
         with: 
           python-version: "3.10"
+      
+      # context
+      - name: Dump GitHub context
+        id: github_context_step
+        run: echo '${{ toJSON(github) }}'
+      - name: Dump job context
+        run: echo '${{ toJSON(job) }}'
+      - name: Dump steps context
+        run: echo '${{ toJSON(steps) }}'
+      - name: Dump runner context
+        run: echo '${{ toJSON(runner) }}'
+      - name: Dump strategy context
+        run: echo '${{ toJSON(strategy) }}'
+      - name: Dump matrix context
+        run: echo '${{ toJSON(matrix) }}'
       - run: echo ${{github.actor}}
-      - run: python -m pip  install -r requirements.txt
-      - run: flake8
-      - run: pytest
+
+      
+      - name: python module installation
+        run: python -m pip  install -r requirements.txt
+      
+      - name: Check pep standards
+        run: flake8
+
+      - name: validate functionality
+        run: pytest
 
   docker_setup:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: docker build . -t flaskapp
+
+      - name: Build docker image
+        run: docker build . -t flaskapp
